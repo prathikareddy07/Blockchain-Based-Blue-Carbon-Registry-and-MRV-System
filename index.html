@@ -1,62 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blue Carbon Registry</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// ===============================
+// BLUE CARBON REGISTRY + MRV SYSTEM (DEMO)
+// Tech stack: Solidity + React + Tailwind + Ethers.js
+// ===============================
 
-<header>
-    <h1>🌊 Blue Carbon Registry</h1>
-    <p>Blockchain-Based MRV System</p>
-</header>
+// ---------- SMART CONTRACT (Solidity) ----------
+// File: contracts/BlueCarbonRegistry.sol
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#register">Register Project</a>
-    <a href="#mrv">MRV Data</a>
-    <a href="#blockchain">Blockchain</a>
-</nav>
+pragma solidity ^0.8.20;
 
-<section id="about">
-    <h2>About</h2>
-    <p>
-        This platform registers blue carbon projects (mangroves, seagrass, salt marshes)
-        and ensures transparent Monitoring, Reporting, and Verification (MRV)
-        using blockchain technology.
-    </p>
-</section>
+contract BlueCarbonRegistry {
+    struct Project {
+        uint256 id;
+        string name;
+        string location;
+        string ecosystem; // mangrove, seagrass, saltmarsh
+        uint256 carbonTonnes;
+        address owner;
+        bool verified;
+    }
 
-<section id="register">
-    <h2>Register Blue Carbon Project</h2>
-    <form id="projectForm">
-        <input type="text" id="projectName" placeholder="Project Name" required>
-        <input type="text" id="location" placeholder="Location" required>
-        <input type="number" id="carbon" placeholder="Estimated Carbon (tons)" required>
-        <button type="submit">Register</button>
-    </form>
+    uint256 public projectCount;
+    mapping(uint256 => Project) public projects;
 
-    <div id="result"></div>
-</section>
+    event ProjectRegistered(uint256 id, string name, address owner);
+    event ProjectVerified(uint256 id);
 
-<section id="mrv">
-    <h2>MRV Records</h2>
-    <ul id="recordsList"></ul>
-</section>
+    function registerProject(
+        string memory _name,
+        string memory _location,
+        string memory _ecosystem,
+        uint256 _carbonTonnes
+    ) public {
+        projectCount++;
+        projects[projectCount] = Project(
+            projectCount,
+            _name,
+            _location,
+            _ecosystem,
+            _carbonTonnes,
+            msg.sender,
+            false
+        );
+        emit ProjectRegistered(projectCount, _name, msg.sender);
+    }
 
-<section id="blockchain">
-    <h2>Blockchain Status</h2>
-    <p>
-        All registered projects are stored as immutable records.
-        (Simulation for demo purpose)
-    </p>
-</section>
+    function verifyProject(uint256 _id) public {
+        Project storage project = projects[_id];
+        require(project.id != 0, "Project not found");
+        project.verified = true;
+        emit ProjectVerified(_id);
+    }
+}
 
-<footer>
-    <p>© 2026 Blue Carbon Registry | Student Project</p>
-</footer>
+// ---------- FRONTEND (React) ----------
+// File: src/App.jsx
 
-<script src="script.js"></script>
-</body>
-</html>
+import { useState, useEffect } from "react";
+import { ethers } from "ethers";
+import "./index.css";
+
+const contractAddress = "0xYourContractAddress";
+const abi = [
+  "function registerProject(string,string,string,uint256)",
+  "function projectCount() view returns (uint256)",
+  "function projects(uint256) view returns (uint256,string,string,string,uint256,address,bool)",
+];
+
+export default function App() {
+  const [projects, setProjects] = useState([]);
+  const [form, setForm] = useState({ name: "", location: "", ecosystem: "", carbon: "" });
+
+  async function loadProjects() {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const contract = new ethers.Contract(contractAddress, abi, provider);
+    const count = await contract.projectCount();
+    let temp = [];
+    for (let i = 1; i <= count; i++) {
+      const p = await contract.projects(i);
+      temp.push(p);
+    }
+    setProjects(temp);
+  }
+
+  async function register() {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    await contract.registerProject(form.name, form.location, form.ecosystem, form.carbon);
+    loadProjects();
+  }
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-emerald-700 text-white p-10">
+      <h1 className="text-4xl font-bold mb-6">🌊 Blue Carbon Registry & MRV</h1>
+
+      <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl mb-10">
+        <h2 className="text-2xl mb-4">Register Blue Carbon Project</h2>
+        <input className="input" placeholder="Project Name" onChange={e => setForm({...form, name: e.target.value})} />
+        <input className="input" placeholder="Location" onChange={e => setForm({...form, location: e.target.value})} />
+        <input className="input" placeholder="Ecosystem (Mangrove, Seagrass…)" onChange={e => setForm({...form, ecosystem: e.target.value})} />
+        <input className="input" placeholder="Carbon Tonnes" onChange={e => setForm({...form, carbon: e.target.value})} />
+        <button onClick={register} className="mt-4 px-6 py-2 bg-emerald-500 rounded-lg hover:bg-emerald-400">Submit</button>
+      </div>
+
+      <h2 className="text-3xl mb-4">Registered Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((p, i) => (
+          <div key={i} className="bg-white/10 p-6 rounded-xl">
+            <h3 className="text-xl font-bold">{p[1]}</h3>
+            <p>📍 {p[2]}</p>
+            <p>🌱 {p[3]}</p>
+            <p>🧮 {p[4].toString()} tCO₂</p>
+            <p className={p[6] ? "text-green-400" : "text-yellow-300"}>
+              {p[6] ? "✔ Verified" : "⏳ Pending Verification"}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------- TAILWIND STYLES ----------
+// File: src/index.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply block w-full p-2 mb-2 rounded bg-white/20 placeholder-white;
+}
