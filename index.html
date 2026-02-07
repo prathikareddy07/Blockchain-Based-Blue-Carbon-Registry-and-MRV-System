@@ -1,61 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Blue Carbon Registry & MRV</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Carbon Registry</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HERO SECTION -->
 <header class="hero">
+  <div class="hero-content">
     <h1>🌊 Blue Carbon Registry</h1>
-    <p>Blockchain-Based Monitoring, Reporting & Verification System</p>
-    <button onclick="scrollToSection()">Get Started</button>
+    <p>
+      A Blockchain-Based Monitoring, Reporting & Verification (MRV) System
+      for Blue Carbon Projects
+    </p>
+    <a href="#about" class="btn-primary">Learn More</a>
+  </div>
 </header>
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-    <a href="#register">Register</a>
-    <a href="#records">MRV Records</a>
+<!-- NAVIGATION -->
+<nav class="navbar" aria-label="Main navigation">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#features">Features</a>
+  <a href="#register">Register</a>
+  <a href="#search">Search</a>
 </nav>
 
+<main id="home">
+
+<!-- ABOUT SECTION -->
 <section id="about" class="section">
-    <h2>About the Project</h2>
-    <p>
-        This platform ensures transparent registration and verification of
-        Blue Carbon projects using blockchain principles to prevent data
-        manipulation and improve trust.
-    </p>
+  <h2>About the Project</h2>
+  <p>
+    The Blue Carbon Registry ensures transparent and secure registration
+    of carbon sequestration projects such as mangroves, seagrass,
+    and salt marshes using blockchain-inspired technology.
+  </p>
 </section>
 
-<section id="features" class="section cards">
-    <div class="card">🔗 Blockchain Transparency</div>
-    <div class="card">📊 MRV Tracking</div>
-    <div class="card">🌱 Carbon Credit Registry</div>
-    <div class="card">🔒 Secure Records</div>
+<!-- FEATURES SECTION -->
+<section id="features" class="section features">
+  <h2>Key Features</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>🔗 Transparency</h3>
+      <p>All MRV records are stored securely and cannot be tampered with.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>📊 MRV Tracking</h3>
+      <p>Accurate monitoring, reporting, and verification of carbon data.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🌱 Carbon Registry</h3>
+      <p>Centralized registry for verified Blue Carbon projects.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🔍 Search Access</h3>
+      <p>Easy search and retrieval of registered project records.</p>
+    </div>
+  </div>
 </section>
 
-<section id="register" class="section">
-    <h2>Register Blue Carbon Project</h2>
-    <form id="projectForm">
-        <input type="text" id="name" placeholder="Project Name" required>
-        <input type="text" id="location" placeholder="Location" required>
-        <input type="number" id="carbon" placeholder="Carbon (tons)" required>
-        <button type="submit">Register Project</button>
-    </form>
-    <p id="msg"></p>
+<!-- CALL TO ACTION -->
+<section class="cta">
+  <h2>Get Started</h2>
+  <p>Register your Blue Carbon project and contribute to climate action.</p>
+  <a href="#register" class="btn-secondary">Register Project</a>
 </section>
 
-<section id="records" class="section">
-    <h2>MRV Records (Simulated Blockchain)</h2>
-    <ul id="list"></ul>
-</section>
+</main>
 
 <footer>
-    <p>© 2026 Blue Carbon Registry | Academic Project</p>
+  <p>© 2026 Blue Carbon Registry | Academic Project</p>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
+
