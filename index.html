@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blue Carbon Registry</title>
+<title>Functional Website</title>
 
 <style>
 body {
@@ -12,35 +12,120 @@ body {
   background: #f4f4f4;
 }
 
-/* Header */
+/* Header & Nav */
 header {
   background: #004aad;
   color: white;
   padding: 15px;
 }
 
-/* Sections */
-section {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 5px;
+nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-/* Clickable headings */
-h3 {
-  cursor: pointer;
-  color: #004aad;
-}
-
-h3:hover {
+nav a:hover {
   text-decoration: underline;
 }
 
-/* Content boxes */
-.content {
-  display: none;
-  margin-top: 10px;
+/* Sections */
+section {
+  padding: 30px;
+  background: white;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+/* Search */
+input {
+  width: 100%;
   padding: 10px;
-  border-left: 4px solid #004aad;
+  font-size: 16px;
+}
+
+/* Items */
+.item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>My Functional Website</h1>
+  <nav aria-label="Main Navigation">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home">
+  <h2>Home</h2>
+  <p>This is the home section. Navigation links work and bring you here.</p>
+
+  <label for="search">Search Projects</label>
+  <input
+    type="text"
+    id="search"
+    placeholder="Search..."
+    onkeyup="searchItems()"
+  />
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <h2>Features</h2>
+
+  <div class="item">Blue Carbon Registry</div>
+  <div class="item">Blockchain MRV System</div>
+  <div class="item">Carbon Credit Tracking</div>
+  <div class="item">Ocean Conservation Data</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: support@example.com</p>
+  <p>Phone: +91 98765 43210</p>
+
+  <button onclick="showContactMessage()">Contact Us</button>
+</section>
+
+<footer>
+  <p>© 2026 Functional Website</p>
+</footer>
+
+<script>
+function searchItems() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let items = document.getElementsByClassName("item");
+
+  for (let i = 0; i < items.length; i++) {
+    let text = items[i].innerText.toLowerCase();
+    items[i].style.display = text.includes(input) ? "block" : "none";
+  }
+}
+
+function showContactMessage() {
+  alert("Thanks for reaching out! This contact section is working.");
+}
+</script>
+
+</body>
+</html>
+
 
