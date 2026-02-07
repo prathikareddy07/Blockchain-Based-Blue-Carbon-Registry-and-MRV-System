@@ -1,50 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Blue Carbon Registry</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Home Page</title>
+
+<style>
+/* Reset basic styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+  background: #0d6efd;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f8f9fa;
+}
+
+.hero h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hero button:hover {
+  background: #0b5ed7;
+}
+
+/* Features Section */
+.features {
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.feature-box {
+  background: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+</style>
 </head>
+
 <body>
 
 <!-- Header -->
 <header>
-    <h1>🌊 Blue Carbon Registry</h1>
-    <p>Blockchain-Based Monitoring, Reporting & Verification System</p>
+  <h1>My Website</h1>
+  <nav aria-label="Main Navigation">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<!-- Navigation -->
-<nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Register</a>
-    <a href="#">Search</a>
-</nav>
-
-<!-- Home Section -->
-<section>
-    <h2>Welcome</h2>
-    <p>
-        This website helps in registering and managing Blue Carbon projects
-        using blockchain-based transparency and MRV principles.
-    </p>
-</section>
-
-<!-- About Section -->
-<section>
-    <h2>About the Project</h2>
-    <p>
-        Blue Carbon includes coastal ecosystems such as mangroves,
-        seagrass, and salt marshes that store carbon.
-    </p>
-</section>
-
-<!-- Footer -->
-<footer>
-    <p>© 2026 Blue Carbon Registry | Academic Project</p>
-</footer>
-
-</body>
-</html>
-
-
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <h2>Welcome to My Home Page</h2>
+  <p>This is a simple, functional and accessible website layout.</p>
+  <button on
