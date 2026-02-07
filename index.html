@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blue Carbon Registry</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>🌊 Blue Carbon Registry</h1>
+    <p>Blockchain-Based MRV System</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#register">Register Project</a>
+    <a href="#mrv">MRV Data</a>
+    <a href="#blockchain">Blockchain</a>
+</nav>
+
+<section id="about">
+    <h2>About</h2>
+    <p>
+        This platform registers blue carbon projects (mangroves, seagrass, salt marshes)
+        and ensures transparent Monitoring, Reporting, and Verification (MRV)
+        using blockchain technology.
+    </p>
+</section>
+
+<section id="register">
+    <h2>Register Blue Carbon Project</h2>
+    <form id="projectForm">
+        <input type="text" id="projectName" placeholder="Project Name" required>
+        <input type="text" id="location" placeholder="Location" required>
+        <input type="number" id="carbon" placeholder="Estimated Carbon (tons)" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="result"></div>
+</section>
+
+<section id="mrv">
+    <h2>MRV Records</h2>
+    <ul id="recordsList"></ul>
+</section>
+
+<section id="blockchain">
+    <h2>Blockchain Status</h2>
+    <p>
+        All registered projects are stored as immutable records.
+        (Simulation for demo purpose)
+    </p>
+</section>
+
+<footer>
+    <p>© 2026 Blue Carbon Registry | Student Project</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
